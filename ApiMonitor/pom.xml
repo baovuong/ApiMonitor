@@ -78,7 +78,7 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<url>jdbc:mysql://localhost/apimonitor</url>
+							<url>jdbc:mysql://localhost/</url>
 							<autocommit>true</autocommit>
 							<sqlCommand>CREATE DATABASE IF NOT EXISTS apimonitor</sqlCommand>
 						</configuration>
@@ -94,7 +94,7 @@
 							<url>jdbc:mysql://localhost/apimonitor</url>
 							<autocommit>true</autocommit>
 							<srcFiles>
-								<srcFile>src/main/resources/sql/callsaccessed.sql</srcFile>
+								<srcFile>src/main/resources/sql/table_setup.sql</srcFile>
 							</srcFiles>
 						</configuration>
 					</execution>

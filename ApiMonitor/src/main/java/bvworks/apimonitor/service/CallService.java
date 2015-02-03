@@ -13,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import bvworks.apimonitor.dao.CallDAO;
-import bvworks.apimonitor.data.Call;
 
 @Path("/calls")
 public class CallService {
