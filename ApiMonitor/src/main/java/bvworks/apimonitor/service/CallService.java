@@ -34,15 +34,23 @@ public class CallService {
 		return Response.status(status).entity(output).build();
 	}
 	
+	
+	@GET
+	@Path("/list")
+	@Produces("application/json")
+	public Map<String,Object> getCalls() {
+		return getCallsByName("all");
+	}
+	
 	@GET
 	@Path("/list/{name}")
 	@Produces("application/json")
-	public Map<String,Object> getCalls(@DefaultValue("") @PathParam("name") String name) {
+	public Map<String,Object> getCallsByName(@PathParam("name") String name) {
 		Map<String,Object> result = new HashMap<String,Object>();
 		
 		CallDAO dao = CallDAO.getInstance();
 		
-		if (name.equals("")) {
+		if (name.equals("all")) {
 			result.put("calls", dao.getCalls());
 		} else {
 			result.put("calls", dao.getCallsByName(name));
