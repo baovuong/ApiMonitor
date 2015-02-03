@@ -12,6 +12,7 @@ function testCall() {
 	
 	$.ajax({
 		url: "api/calls/add",
+		type: "POST",
 		data: {name: call},
 		dataType: "text",
 		success: function(data, textStatus, jqXHR) {
