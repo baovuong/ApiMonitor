@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test</title>
+
+<script src="jquery-1.11.2.min.js"></script>
+<script>
+function testCall() {
+	
+	var call = "mock." + $("#testbutton").val)();
+	
+	$.ajax({
+		url: "api/calls/add",
+		data: {name: call},
+		dataType: "text",
+		success: function(data, textStatus, jqXHR) {
+			alert(data);
+		},
+		error: function() {
+			alert("something went horribly wrong.");
+		}
+	});
+}
+</script>
+</head>
+<body>
+<p>this is just to test the monitor, by recording mock api calls.</p>
+
+<button id="testbutton">test</button>
+
+</body>
+</html>
