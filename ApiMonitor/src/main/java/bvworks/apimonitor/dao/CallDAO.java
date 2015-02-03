@@ -124,7 +124,7 @@ public class CallDAO extends BaseDAO {
 				Call call = new Call();
 				call.setId(rs.getInt("id"));
 				call.setName(rs.getString("name"));
-				DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MI:SS");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				call.setDate(dateFormat.parse(rs.getString("date")));
 				
 				calls.add(call);
