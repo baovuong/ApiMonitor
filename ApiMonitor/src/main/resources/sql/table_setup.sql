@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS apimonitor.calls
+(
+id INT NOT NULL AUTO_INCREMENT,
+date CHAR(30),
+name CHAR(30),
+PRIMARY KEY (id)
+);
