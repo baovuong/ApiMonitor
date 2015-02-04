@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="bvworks.apimonitor.dao.CallDAO" %>
 <%@ page import="bvworks.apimonitor.action.CallAction" %>
 
 <%
 CallAction action = new CallAction();
+String[] names = action.getCallNames();
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,14 +17,17 @@ CallAction action = new CallAction();
 </head>
 <body>
 <h1>API Monitor</h1>
-<select id="apinames">
-<% 
-String[] names = action.getCallNames();
-for (String name : names) {
-	out.println(String.format("<option value=\"%s\">%s</option>", name,name));
+<%
+if (names.length > 0) {
+	out.println("<select id=\"apinames\">");
+	for (String name : names) {
+	    out.println(String.format("<option value=\"%s\">%s</option>", name,name));
+	}
+	out.println("</select>");
 }
+
 %>
-</select>
+<br/>
 <canvas id="myChart" width="400" height="400"></canvas>
 
 </body>
