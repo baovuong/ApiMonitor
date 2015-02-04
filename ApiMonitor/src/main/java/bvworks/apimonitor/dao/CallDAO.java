@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
-import bvworks.apimonitor.data.Call;
+import bvworks.apimonitor.bean.CallBean;
 
 public class CallDAO extends BaseDAO {
 	private static CallDAO instance = null;
@@ -24,6 +24,30 @@ public class CallDAO extends BaseDAO {
 			}
 		}
 		return instance;
+	}
+	
+	public String[] getNames() {
+		List<String> names = new LinkedList<String>();
+		Connection connection = null;
+		try {
+			connection  = createConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT DISTINCT name FROM calls";
+			ResultSet rs = statement.executeQuery(query);
+			
+			while (rs.next()) {
+				names.add(rs.getString("name"));
+			}
+			statement.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+		}
+
+		return names.toArray(new String[names.size()]);	
 	}
 	
 	public void addCall(String call) {
@@ -46,8 +70,8 @@ public class CallDAO extends BaseDAO {
 		}
 	}
 	
-	public Call[] getCallsByName(String name) {
-		List<Call> calls = new LinkedList<Call>();
+	public CallBean[] getCallsByName(String name) {
+		List<CallBean> calls = new LinkedList<CallBean>();
 		Connection connection = null;
 		try {
 			connection  = createConnection();
@@ -57,7 +81,7 @@ public class CallDAO extends BaseDAO {
 			ResultSet rs = statement.executeQuery(query);
 			
 			while (rs.next()) {
-				Call call = new Call();
+				CallBean call = new CallBean();
 				call.setId(rs.getInt("id"));
 				call.setName(rs.getString("name"));
 				DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MI:SS");
@@ -76,11 +100,11 @@ public class CallDAO extends BaseDAO {
 		} finally {
 
 		}
-		return calls.toArray(new Call[calls.size()]);			
+		return calls.toArray(new CallBean[calls.size()]);			
 	}
 	
-	public Call[] getCallsToday() {
-		List<Call> calls = new LinkedList<Call>();
+	public CallBean[] getCallsToday() {
+		List<CallBean> calls = new LinkedList<CallBean>();
 		Connection connection = null;
 		try {
 			connection  = createConnection();
@@ -89,7 +113,7 @@ public class CallDAO extends BaseDAO {
 			ResultSet rs = statement.executeQuery(query);
 			
 			while (rs.next()) {
-				Call call = new Call();
+				CallBean call = new CallBean();
 				call.setId(rs.getInt("id"));
 				call.setName(rs.getString("name"));
 				DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MI:SS");
@@ -108,11 +132,11 @@ public class CallDAO extends BaseDAO {
 		} finally {
 
 		}
-		return calls.toArray(new Call[calls.size()]);			
+		return calls.toArray(new CallBean[calls.size()]);			
 	}
 	
-	public Call[] getCalls() {
-		List<Call> calls = new LinkedList<Call>();
+	public CallBean[] getCalls() {
+		List<CallBean> calls = new LinkedList<CallBean>();
 		Connection connection = null;
 		try {
 			connection  = createConnection();
@@ -121,7 +145,7 @@ public class CallDAO extends BaseDAO {
 			ResultSet rs = statement.executeQuery(query);
 			
 			while (rs.next()) {
-				Call call = new Call();
+				CallBean call = new CallBean();
 				call.setId(rs.getInt("id"));
 				call.setName(rs.getString("name"));
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -141,6 +165,6 @@ public class CallDAO extends BaseDAO {
 
 		}
 
-		return calls.toArray(new Call[calls.size()]);		
+		return calls.toArray(new CallBean[calls.size()]);		
 	}
 }

@@ -1,14 +1,14 @@
-package bvworks.apimonitor.data;
+package bvworks.apimonitor.bean;
 
 import java.util.Date;
 
-public class Call {
+public class CallBean {
 	
 	private int id;
 	private String name;
 	private Date date;
 	
-	public Call() {}
+	public CallBean() {}
 
 	public int getId() {
 		return id;
