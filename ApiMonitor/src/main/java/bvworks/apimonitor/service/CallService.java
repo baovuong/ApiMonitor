@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import bvworks.apimonitor.bean.CallBean;
 import bvworks.apimonitor.dao.CallDAO;
 
 @Path("/calls")
@@ -49,12 +50,14 @@ public class CallService {
 		Map<String,Object> result = new HashMap<String,Object>();
 		
 		CallDAO dao = CallDAO.getInstance();
-		
+		CallBean[] calls = null;
 		if (name.equals("all")) {
-			result.put("calls", dao.getCalls());
+			calls = dao.getCalls();
 		} else {
-			result.put("calls", dao.getCallsByName(name));
+			calls = dao.getCallsByName(name);
 		}
+		
+		result.put("calls", calls);
 		
 		return result;
 	}
