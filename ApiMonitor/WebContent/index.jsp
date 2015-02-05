@@ -119,7 +119,7 @@ String[] names = action.getCallNames();
 		updateChart(labels,values);
 		
 		$("#apinames").on('change',function() {
-			alert("changing data");
+			//alert("changing data");
 			collectData();
 		});
 	});
