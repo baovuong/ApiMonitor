@@ -28,6 +28,15 @@ html, body {
   margin: 0px;
 }
 
+.mobilechart {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 800px;
+}
+
 </style>
 
 <% if (mobile) {%>
@@ -40,7 +49,7 @@ html, body {
 <script>
 
 	function updateChart(labels, values) {
-		$('#chart').replaceWith('<canvas id="chart" width="400px" height="400px">canvas not supported</canvas>');
+		$('#chart').replaceWith('<canvas id="chart" <%if(mobile){%>class="mobilechart"<%}%> >canvas not supported</canvas>');
 		//var label = [0,1,2,3,4];
 		//var data = [];
 		var data = {
@@ -157,7 +166,7 @@ html, body {
 <%if (mobile) {%> </div> <%}%>
 
 <%if (mobile) {%><div data-role="main" class="ui-content"> <%}%>
-<%if (mobile) {%><fieldset class="ui-field-contain"><label for="apinames">Name:</label><%}%>
+<%if (mobile) {%><fieldset class="ui-field-contain"><%}%>
 
 	<select id="apinames">
 	<%
@@ -170,8 +179,10 @@ html, body {
 	
 	<%if (!mobile) {%><br /><%}%>
 	
-	<%if (mobile) {%><div data-role="content" class="ui-content" role="main"><%}%>
-	<canvas id="chart" width="400px" height="400px">canvas not supported</canvas>
+	<%if (mobile) {%><div data-role="content" class="ui-content"><%}%>
+	 
+	<canvas id="chart" <%if(mobile){%>class="mobilechart"<%}%> >canvas not supported</canvas>
+	
 	<%if (mobile) {%></div><%}%>
 	
     <%if (mobile) {%></div><%}%>
