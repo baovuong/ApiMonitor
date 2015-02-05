@@ -172,7 +172,7 @@ html, body {
 	<%if (mobile) {%></fieldset><%}%>
 	
 	<br />
-	<canvas id="chart" width="400" height="400"></canvas>
+	<canvas id="chart"></canvas>
     <%if (mobile) {%></div><%}%>
 	<%if (mobile) {%></div><%}%>
 </body>
