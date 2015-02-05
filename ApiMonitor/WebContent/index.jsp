@@ -8,9 +8,9 @@
 String[] names = action.getCallNames();
 String browserType = request.getHeader("User-Agent");
 boolean mobile = false;
-if (browserType.contains("AppleWebKit") || browserType.contains("Mobile"))
+if (browserType.contains("Mobile"))
 	mobile = true;
-
+System.out.println("mobile: "+mobile);
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,9 +19,7 @@ if (browserType.contains("AppleWebKit") || browserType.contains("Mobile"))
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>API Monitor</title>
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script
-    src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <script src="jquery-1.11.2.min.js"></script>
 <script src="Chart.min.js"></script>
 <script>
@@ -144,8 +142,8 @@ if (browserType.contains("AppleWebKit") || browserType.contains("Mobile"))
 <%if (mobile) {%> </div> <%}%>
 
 <%if (mobile) {%><div data-role="main" class="ui-content"> <%}%>
-
-<%if (mobile) {%><fieldset class="ui-field-contain"><label for="racers">Racers:</label><%}%>
+<span>user agent: <%= browserType %></span>
+<%if (mobile) {%><fieldset class="ui-field-contain"><label for="apinames">Name:</label><%}%>
 
 	<select id="apinames">
 	<%
