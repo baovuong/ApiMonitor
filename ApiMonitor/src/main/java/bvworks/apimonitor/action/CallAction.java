@@ -34,7 +34,7 @@ public class CallAction {
 		
 		CallBean[] calls = dao.getCallsByName(name);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");		
-		for (CallBean call : calls) {
+		for (CallBean call : calls) {	
 			// by minute
 			System.out.println("date: "+call.getDate().toString());
 			String dateString = format.format(call.getDate());

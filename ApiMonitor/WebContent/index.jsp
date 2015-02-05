@@ -6,6 +6,11 @@
 <%
 	CallAction action = new CallAction();
 String[] names = action.getCallNames();
+String browserType = request.getHeader("User-Agent");
+boolean mobile = false;
+if (browserType.contains("AppleWebKit") || browserType.contains("Mobile"))
+	mobile = true;
+
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,6 +21,7 @@ String[] names = action.getCallNames();
 <script src="jquery-1.11.2.min.js"></script>
 <script src="Chart.min.js"></script>
 <script>
+
 	function updateChart(labels, values) {
 		$('#chart').replaceWith('<canvas id="chart" width="400" height="400"></canvas>');
 		//var label = [0,1,2,3,4];
@@ -114,9 +120,7 @@ String[] names = action.getCallNames();
 	}
 	
 	$(document).ready(function() {
-		labels = [1,2,3,4];
-		values = [0];
-		updateChart(labels,values);
+		collectData();
 		
 		$("#apinames").on('change',function() {
 			//alert("changing data");
@@ -128,7 +132,17 @@ String[] names = action.getCallNames();
 
 </head>
 <body>
+
+<%if (mobile) {%> <div data-role="page"> <%}%>
+
+<%if (mobile) {%> <div data-role="header"> <%}%>
 	<h1>API Monitor</h1>
+<%if (mobile) {%> </div> <%}%>
+
+<%if (mobile) {%><div data-role="main" class="ui-content"> <%}%>
+
+<%if (mobile) {%><fieldset class="ui-field-contain"><label for="racers">Racers:</label><%}%>
+
 	<select id="apinames">
 	<%
 	for (String name : names) {
@@ -136,10 +150,11 @@ String[] names = action.getCallNames();
 	}
 	%>
 	</select>
+	<%if (mobile) {%></fieldset><%}%>
+	
 	<br />
 	<canvas id="chart" width="400" height="400"></canvas>
-	<script>
-		
-	</script>
+	<%if (mobile) {%></div><%}%>
+	<%if (mobile) {%></div><%}%>
 </body>
 </html>
