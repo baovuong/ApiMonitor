@@ -87,10 +87,19 @@ String[] names = action.getCallNames();
 	}
 	
 	function collectData() {
+		
+		var name = $("#apinames").val();
+		
 		$.ajax({
-			url: 'api/call/list/',
+			url: 'api/call/list/'+name,
 			type: 'GET',
-			data: {name: call}
+			dataType: 'json',
+			data: {},
+			success: function(data, textStatus, jqXHR) {
+			},
+			error: function() {
+				alert("you done fucked up.");
+			}
 			
 		});
 	}

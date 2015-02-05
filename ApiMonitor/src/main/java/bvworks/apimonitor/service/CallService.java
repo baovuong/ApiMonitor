@@ -1,6 +1,8 @@
 package bvworks.apimonitor.service;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +18,12 @@ import javax.ws.rs.core.Response;
 
 import bvworks.apimonitor.action.CallAction;
 import bvworks.apimonitor.bean.CallBean;
+import bvworks.apimonitor.bean.CallCountBean;
 import bvworks.apimonitor.dao.CallDAO;
 
 @Path("/calls")
 public class CallService {
-	
+	private CallAction action = new CallAction();
 	
 	@POST
 	@Path("/add")
@@ -33,8 +36,6 @@ public class CallService {
 		String output = "";
 		int status = 0;
 		
-		CallAction action = new CallAction();
-		
 		action.recordCall(name,ip);
 		
 		output = "Successfully added: " + name;
@@ -43,6 +44,26 @@ public class CallService {
 		return Response.status(status).entity(output).build();
 	}
 	
+	@GET
+	@Path("/count/{name}")
+	@Produces("application/json")
+	public Map<String,Object> getCallCount(
+			@PathParam("name") String name) {
+		
+		Map<String,Object> result = new HashMap<String,Object>();
+		
+		Map<String,Integer> count = action.getCallCount(name);
+		List<CallCountBean> countList = new LinkedList<CallCountBean>();
+		for (String date : count.keySet()) {
+			CallCountBean bean = new CallCountBean();
+			bean.setDate(date);
+			bean.setCount(count.get(date));
+			countList.add(bean);
+		}
+		
+		result.put("counts", countList);
+		return result;
+	}
 	
 	@GET
 	@Path("/list")
