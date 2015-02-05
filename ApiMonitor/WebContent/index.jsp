@@ -40,7 +40,7 @@ html, body {
 <script>
 
 	function updateChart(labels, values) {
-		$('#chart').replaceWith('<canvas id="chart"></canvas>');
+		$('#chart').replaceWith('<canvas id="chart" width="400px" height="400px">canvas not supported</canvas>');
 		//var label = [0,1,2,3,4];
 		//var data = [];
 		var data = {
@@ -106,8 +106,6 @@ html, body {
 		};
 
 		var ctx = $('#chart').get(0).getContext("2d");
-		ctx.canvas.width  = window.innerWidth;
-		ctx.canvas.height = window.innerHeight
 		new Chart(ctx).Line(data, options);
 	}
 	
@@ -171,7 +169,11 @@ html, body {
 	<%if (mobile) {%></fieldset><%}%>
 	
 	<br />
-	<canvas id="chart"></canvas>
+	
+	<%if (mobile) {%><div data-role="content" class="ui-content" role="main"><%}%>
+	<canvas id="chart" width="400px" height="400px">canvas not supported</canvas>
+	<%if (mobile) {%></div><%}%>
+	
     <%if (mobile) {%></div><%}%>
 	<%if (mobile) {%></div><%}%>
 </body>
