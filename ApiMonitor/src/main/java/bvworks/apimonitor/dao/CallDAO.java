@@ -50,16 +50,18 @@ public class CallDAO extends BaseDAO {
 		return names.toArray(new String[names.size()]);	
 	}
 	
-	public void addCall(String call) {
+	public void addCall(String call, String ip) {
+		System.out.println("calldao.ip: "+ip);
+		
 		Connection connection = null;
 		try {
 			connection = createConnection();
-			String sql = "INSERT INTO calls (date,name) VALUES (NOW(),?)";
+			String sql = "INSERT INTO calls (date,name,ip_address) VALUES (NOW(),?,?)";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, call);
+			statement.setString(2, ip);
 			
-			boolean thing = statement.execute();
-			System.out.println("thing: "+thing);
+			statement.execute();
 			
 			statement.close();
 			connection.close();
@@ -71,30 +73,22 @@ public class CallDAO extends BaseDAO {
 	}
 	
 	public CallBean[] getCallsByName(String name) {
+		System.out.println("dao looking for "+name);
 		List<CallBean> calls = new LinkedList<CallBean>();
 		Connection connection = null;
 		try {
 			connection  = createConnection();
-			String query = "SELECT * FROM calls WHERE name=?";
+			String query = "SELECT * FROM calls WHERE name = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, name);
-			ResultSet rs = statement.executeQuery(query);
+			ResultSet rs = statement.executeQuery();
 			
 			while (rs.next()) {
-				CallBean call = new CallBean();
-				call.setId(rs.getInt("id"));
-				call.setName(rs.getString("name"));
-				DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MI:SS");
-				call.setDate(dateFormat.parse(rs.getString("date")));
-				
-				calls.add(call);
+				calls.add(fetchCall(rs));
 			}
 			statement.close();
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -113,20 +107,11 @@ public class CallDAO extends BaseDAO {
 			ResultSet rs = statement.executeQuery(query);
 			
 			while (rs.next()) {
-				CallBean call = new CallBean();
-				call.setId(rs.getInt("id"));
-				call.setName(rs.getString("name"));
-				DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:MI:SS");
-				call.setDate(dateFormat.parse(rs.getString("date")));
-				
-				calls.add(call);
+				calls.add(fetchCall(rs));
 			}
 			statement.close();
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -145,20 +130,11 @@ public class CallDAO extends BaseDAO {
 			ResultSet rs = statement.executeQuery(query);
 			
 			while (rs.next()) {
-				CallBean call = new CallBean();
-				call.setId(rs.getInt("id"));
-				call.setName(rs.getString("name"));
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				call.setDate(dateFormat.parse(rs.getString("date")));
-				
-				calls.add(call);
+				calls.add(fetchCall(rs));
 			}
 			statement.close();
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -166,5 +142,13 @@ public class CallDAO extends BaseDAO {
 		}
 
 		return calls.toArray(new CallBean[calls.size()]);		
+	}
+	
+	private CallBean fetchCall(ResultSet rs) throws SQLException {
+		CallBean call = new CallBean();
+		call.setId(rs.getInt("id"));
+		call.setDate(rs.getString("date"));
+		call.setName(rs.getString("name"));
+		return call;
 	}
 }

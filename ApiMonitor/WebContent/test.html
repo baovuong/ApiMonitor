@@ -8,12 +8,10 @@
 <script>
 function testCall() {
 	
-	var call = "mock." + $("#testbutton").val();
-	
 	$.ajax({
-		url: "api/calls/add",
-		type: "POST",
-		data: {name: call},
+		url: "api/test/mock",
+		type: "GET",
+		data: {},
 		dataType: "text",
 		success: function(data, textStatus, jqXHR) {
 			alert(data);

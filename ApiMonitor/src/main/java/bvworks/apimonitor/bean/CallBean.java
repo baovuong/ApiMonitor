@@ -1,5 +1,8 @@
 package bvworks.apimonitor.bean;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CallBean {
@@ -32,6 +35,17 @@ public class CallBean {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public void setDate(String dateString) {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			setDate(format.parse(dateString));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			setDate(new Date());
+		}
 	}
 	
 }

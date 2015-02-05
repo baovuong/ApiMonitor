@@ -17,7 +17,7 @@ String[] names = action.getCallNames();
 <script src="Chart.min.js"></script>
 <script>
 	function updateChart(labels, values) {
-
+		$('#chart').replaceWith('<canvas id="chart" width="400" height="400"></canvas>');
 		//var label = [0,1,2,3,4];
 		//var data = [];
 		var data = {
@@ -82,8 +82,17 @@ String[] names = action.getCallNames();
 
 		};
 
-		var ctx = document.getElementById("myChart").getContext("2d");
-		var myLineChart = new Chart(ctx).Line(data, options);
+		var ctx = $('#chart').get(0).getContext("2d");
+		new Chart(ctx).Line(data, options);
+	}
+	
+	function collectData() {
+		$.ajax({
+			url: 'api/call/list/',
+			type: 'GET',
+			data: {name: call}
+			
+		});
 	}
 	
 	$(document).ready(function() {
@@ -97,17 +106,15 @@ String[] names = action.getCallNames();
 </head>
 <body>
 	<h1>API Monitor</h1>
+	<select id="apinames">
 	<%
-		if (names.length > 0) {
-		out.println("<select id=\"apinames\">");
-		for (String name : names) {
-		    out.println(String.format("<option value=\"%s\">%s</option>", name,name));
-		}
-		out.println("</select>");
+	for (String name : names) {
+	    out.println(String.format("<option value=\"%s\">%s</option>", name,name));
 	}
 	%>
+	</select>
 	<br />
-	<canvas id="myChart" width="400" height="400"></canvas>
+	<canvas id="chart" width="400" height="400"></canvas>
 	<script>
 		
 	</script>
