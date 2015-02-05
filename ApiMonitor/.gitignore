@@ -1,5 +1,5 @@
 /target/
 .settings/
-src/main/resources/sql/auth.ini
+/src/main/resources/sql/auth.ini
 .project
 .classpath
