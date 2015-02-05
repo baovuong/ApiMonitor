@@ -20,8 +20,17 @@ System.out.println("mobile: "+mobile);
 <title>API Monitor</title>
 
 <script src="jquery-1.11.2.min.js"></script>
-<% if (mobile) {%>
 
+<style>
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+}
+
+</style>
+
+<% if (mobile) {%>
 <link rel="stylesheet"
     href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -97,6 +106,8 @@ System.out.println("mobile: "+mobile);
 		};
 
 		var ctx = $('#chart').get(0).getContext("2d");
+		ctx.canvas.width  = window.innerWidth;
+		ctx.canvas.height = window.innerHeight
 		new Chart(ctx).Line(data, options);
 	}
 	
