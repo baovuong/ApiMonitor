@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import bvworks.apimonitor.bean.CallBean;
 import bvworks.apimonitor.dao.CallDAO;
@@ -27,7 +28,7 @@ public class CallAction {
 	}
 	
 	public Map<String,Integer> getCallCount(String name) {
-		Map<String,Integer> result = new HashMap<String,Integer>();
+		Map<String,Integer> result = new TreeMap<String,Integer>();
 		
 		CallDAO dao = CallDAO.getInstance();
 		

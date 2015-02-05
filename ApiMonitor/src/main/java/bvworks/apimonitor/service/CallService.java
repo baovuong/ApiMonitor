@@ -56,7 +56,7 @@ public class CallService {
 		
 		Map<String,Integer> count = action.getCallCount(name);
 		List<CallCountBean> countList = new LinkedList<CallCountBean>();
-		SortedSet<String> dates = (SortedSet<String>) count.keySet();
+		Set<String> dates = count.keySet();
 		for (String date : dates) {
 			CallCountBean bean = new CallCountBean();
 			bean.setDate(date);
