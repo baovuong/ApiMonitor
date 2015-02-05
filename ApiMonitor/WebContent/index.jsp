@@ -40,7 +40,7 @@ html, body {
 <script>
 
 	function updateChart(labels, values) {
-		$('#chart').replaceWith('<canvas id="chart" width="400" height="400"></canvas>');
+		$('#chart').replaceWith('<canvas id="chart"></canvas>');
 		//var label = [0,1,2,3,4];
 		//var data = [];
 		var data = {
