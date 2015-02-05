@@ -168,7 +168,7 @@ html, body {
 	</select>
 	<%if (mobile) {%></fieldset><%}%>
 	
-	<br />
+	<%if (!mobile) {%><br /><%}%>
 	
 	<%if (mobile) {%><div data-role="content" class="ui-content" role="main"><%}%>
 	<canvas id="chart" width="400px" height="400px">canvas not supported</canvas>
