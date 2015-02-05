@@ -96,6 +96,15 @@ String[] names = action.getCallNames();
 			dataType: 'json',
 			data: {},
 			success: function(data, textStatus, jqXHR) {
+				var counts = data.counts;
+				var labels = [];
+				var values = [];
+				for (var i=0; i<counts.length; i++) {
+					labels.push(counts[i].date);
+					values.push(counts[i].count);
+				}
+				
+				updateChart(labels,values);
 			},
 			error: function() {
 				alert("you done fucked up.");
@@ -108,6 +117,10 @@ String[] names = action.getCallNames();
 		labels = [1,2,3,4];
 		values = [0];
 		updateChart(labels,values);
+		
+		$("#apinames").select(function() {
+			collectData();
+		});
 	});
 	
 </script>
