@@ -91,7 +91,7 @@ String[] names = action.getCallNames();
 		var name = $("#apinames").val();
 		
 		$.ajax({
-			url: 'api/call/list/'+name,
+			url: 'api/calls/count/'+name,
 			type: 'GET',
 			dataType: 'json',
 			data: {},
