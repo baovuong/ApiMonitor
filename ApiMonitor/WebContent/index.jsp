@@ -159,7 +159,6 @@ html, body {
 <%if (mobile) {%> </div> <%}%>
 
 <%if (mobile) {%><div data-role="main" class="ui-content"> <%}%>
-<span>user agent: <%= browserType %></span>
 <%if (mobile) {%><fieldset class="ui-field-contain"><label for="apinames">Name:</label><%}%>
 
 	<select id="apinames">
