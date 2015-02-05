@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DefaultValue;
@@ -54,7 +56,8 @@ public class CallService {
 		
 		Map<String,Integer> count = action.getCallCount(name);
 		List<CallCountBean> countList = new LinkedList<CallCountBean>();
-		for (String date : count.keySet()) {
+		SortedSet<String> dates = (SortedSet<String>) count.keySet();
+		for (String date : dates) {
 			CallCountBean bean = new CallCountBean();
 			bean.setDate(date);
 			bean.setCount(count.get(date));
