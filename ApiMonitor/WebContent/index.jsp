@@ -17,16 +17,10 @@ System.out.println("mobile: "+mobile);
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
 <title>API Monitor</title>
 
-<script src="jquery-1.11.2.min.js"></script>
-
 <style>
-html, body {
-  width:  100%;
-  height: 100%;
-  margin: 0px;
-}
 
 .mobilechart {
     padding-left: 0;
@@ -38,6 +32,8 @@ html, body {
 }
 
 </style>
+
+<script src="jquery-1.11.2.min.js"></script>
 
 <% if (mobile) {%>
 <link rel="stylesheet"
@@ -115,6 +111,8 @@ html, body {
 		};
 
 		var ctx = $('#chart').get(0).getContext("2d");
+		ctx.canvas.width  = window.innerWidth;
+		ctx.canvas.height = window.innerHeight*0.55;
 		new Chart(ctx).Line(data, options);
 	}
 	
