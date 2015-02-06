@@ -111,8 +111,13 @@ System.out.println("mobile: "+mobile);
 		};
 
 		var ctx = $('#chart').get(0).getContext("2d");
+		<%if(mobile){%>
 		ctx.canvas.width  = window.innerWidth;
 		ctx.canvas.height = window.innerHeight*0.55;
+		<%}else{%>
+		ctx.canvas.width  = 500;
+        ctx.canvas.height = 500;
+		<%}%>
 		new Chart(ctx).Line(data, options);
 	}
 	
