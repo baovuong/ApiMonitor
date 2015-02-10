@@ -56,7 +56,7 @@ System.out.println("mobile: "+mobile);
     function updateTable() {
     	
     	var table = $('#todayscalltable');
-    	
+    	var name = $('#apinames').val();
         $.ajax({
             url: 'api/calls/count/'+name+'today',
             type: 'GET',
