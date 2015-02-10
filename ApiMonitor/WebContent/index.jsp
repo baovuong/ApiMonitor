@@ -179,6 +179,7 @@ System.out.println("mobile: "+mobile);
 				}
 				
 				updateChart(labels,values);
+				updateTable();
 			},
 			error: function() {
 				alert("you done fucked up.");
