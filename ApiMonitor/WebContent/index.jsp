@@ -38,7 +38,7 @@ System.out.println("mobile: "+mobile);
 
 .right {
     float:right;
-    width:30%;
+    width:25%;
 }
 </style>
 
@@ -231,7 +231,7 @@ System.out.println("mobile: "+mobile);
 	</div>
 	
 	<div class="right">
-	<table id="todayscalltable">
+	<table border="1" id="todayscalltable">
 	</table>
 	</div>
 	
