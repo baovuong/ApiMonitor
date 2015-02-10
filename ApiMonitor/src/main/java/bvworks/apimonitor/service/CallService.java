@@ -23,7 +23,7 @@ import bvworks.apimonitor.dao.CallDAO;
 
 @Path("/calls")
 public class CallService {
-	private CallAction action = new CallAction();
+	private CallAction action = new CallAction("yyyy");
 	
 	@POST
 	@Path("/add")
