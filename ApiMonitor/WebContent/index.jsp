@@ -209,6 +209,9 @@ System.out.println("mobile: "+mobile);
 <%if (mobile) {%> </div> <%}%>
 
 <%if (mobile) {%><div data-role="main" class="ui-content"> <%}%>
+
+<div id="left">
+
 <%if (mobile) {%><fieldset class="ui-field-contain"><%}%>
 
 	<select id="apinames">
@@ -225,10 +228,12 @@ System.out.println("mobile: "+mobile);
 	<%if (mobile) {%><div data-role="content" class="ui-content"><%}%>
 	<canvas id="chart" <%if(mobile){%>class="mobilechart"<%}%> >canvas not supported</canvas>
 	<%if (mobile) {%></div><%}%>
+	</div>
 	
+	<div id="right">
 	<table id="todayscalltable">
 	</table>
-	
+	</div>
 	
     <%if (mobile) {%></div><%}%>
 	<%if (mobile) {%></div><%}%>
