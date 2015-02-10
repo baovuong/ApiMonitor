@@ -130,7 +130,7 @@ System.out.println("mobile: "+mobile);
 			type: 'GET',
 			dataType: 'json',
 			data: {
-				'per': 'hour'
+				'per': 'day'
 			},
 			success: function(data, textStatus, jqXHR) {
 				var counts = data.counts;
