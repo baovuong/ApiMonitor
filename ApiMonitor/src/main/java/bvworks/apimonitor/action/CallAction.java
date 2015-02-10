@@ -46,7 +46,7 @@ public class CallAction {
 			System.out.println(currentString);
 			if (!result.keySet().contains(currentString))
 				result.put(currentString, 0);
-			current.plusMinutes(1);
+			current = current.plusMinutes(1);
 		}
 		return result;
 	}
@@ -67,7 +67,7 @@ public class CallAction {
 			System.out.println(currentString);
 			if (!result.keySet().contains(currentString))
 				result.put(currentString, 0);
-			current.plusHours(1);
+			current = current.plusHours(1);
 		}
 		
 		
@@ -91,7 +91,7 @@ public class CallAction {
 			System.out.println(currentString);
 			if (!result.keySet().contains(currentString))
 				result.put(currentString, 0);
-			current.plusDays(1);
+			current = current.plusDays(1);
 		}
 		
 		
