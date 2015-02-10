@@ -4,7 +4,7 @@
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.Date"%>
 <%
-	CallAction action = new CallAction();
+	CallAction action = new CallAction("YYYY");
 String[] names = action.getCallNames();
 String browserType = request.getHeader("User-Agent");
 boolean mobile = false;
@@ -28,9 +28,18 @@ System.out.println("mobile: "+mobile);
     margin-left: auto;
     margin-right: auto;
     display: block;
-    width: 800px;
+    width: 90%;
 }
 
+.left {
+    float:left;
+    width:60%;
+}
+
+.right {
+    float:right;
+    width:40%;
+}
 </style>
 
 <script src="jquery-1.11.2.min.js"></script>
@@ -43,6 +52,34 @@ System.out.println("mobile: "+mobile);
 
 <script src="Chart.min.js"></script>
 <script>
+
+    function updateTable() {
+    	
+    	var table = $('#todayscalltable');
+    	
+        $.ajax({
+            url: 'api/calls/count/'+name+'/today',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+            },
+            success: function(data, textStatus, jqXHR) {
+            	var counts = data.counts;
+            	var output = '<tr><th>Date/Time</th><th>Count</th></tr>';
+            	for (var i=0; i<counts.length; i++) {
+            		output += '<tr>';
+            		output += '<td>'+counts[i].date+'</td>';
+            		output += '<td>'+counts[i].count+'</td>';
+            		output += '</tr>';
+            	}
+            	
+            	table.html(output);
+            },
+            error: function() {
+            }
+            
+        });    	
+    }
 
 	function updateChart(labels, values) {
 		$('#chart').replaceWith('<canvas id="chart" <%if(mobile){%>class="mobilechart"<%}%> >canvas not supported</canvas>');
@@ -185,10 +222,12 @@ System.out.println("mobile: "+mobile);
 	<%if (!mobile) {%><br /><%}%>
 	
 	<%if (mobile) {%><div data-role="content" class="ui-content"><%}%>
-	 
 	<canvas id="chart" <%if(mobile){%>class="mobilechart"<%}%> >canvas not supported</canvas>
-	
 	<%if (mobile) {%></div><%}%>
+	
+	<table id="todayscalltable">
+	</table>
+	
 	
     <%if (mobile) {%></div><%}%>
 	<%if (mobile) {%></div><%}%>

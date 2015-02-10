@@ -12,8 +12,10 @@ import bvworks.apimonitor.dao.CallDAO;
 
 public class CallAction {
 	
-	public CallAction() {
-		
+	private DateTimeFormatter outputDateFormat;
+	
+	public CallAction(String format) {
+		outputDateFormat = DateTimeFormat.forPattern(format);
 	}
 	
 	public String[] getCallNames() {
@@ -94,6 +96,24 @@ public class CallAction {
 			current = current.plusDays(1);
 		}
 		
+		
+		return result;
+	}
+	
+	public Map<String,Integer> getCallCountToday(String name) {
+		Map<String,Integer> result = new TreeMap<String,Integer>();
+		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");	
+		CallDAO dao = CallDAO.getInstance();
+		
+		CallBean[] calls = dao.getCallsTodayByName(name);
+		for (CallBean call : calls) {	
+			String dateString = format.print(call.getDate());
+			if (!result.containsKey(dateString)) {
+				result.put(dateString, 1);
+			} else {
+				result.put(dateString, result.get(dateString) + 1);
+			}
+		}
 		
 		return result;
 	}

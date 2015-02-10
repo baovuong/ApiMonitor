@@ -120,6 +120,31 @@ public class CallDAO extends BaseDAO {
 		return calls.toArray(new CallBean[calls.size()]);			
 	}
 	
+	public CallBean[] getCallsTodayByName(String name) {
+		List<CallBean> calls = new LinkedList<CallBean>();
+		Connection connection = null;
+		try {
+			connection  = createConnection();
+			String query = "SELECT * FROM calls WHERE name = ? AND date LIKE CONCAT(CURDATE(),'%')";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, name);
+			ResultSet rs = statement.executeQuery();
+			
+			while (rs.next()) {
+				calls.add(fetchCall(rs));
+			}
+			statement.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+		}
+		return calls.toArray(new CallBean[calls.size()]);				
+	}
+	
+	
 	public CallBean[] getCalls() {
 		List<CallBean> calls = new LinkedList<CallBean>();
 		Connection connection = null;

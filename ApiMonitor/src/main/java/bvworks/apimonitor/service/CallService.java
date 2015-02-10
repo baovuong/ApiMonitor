@@ -44,6 +44,28 @@ public class CallService {
 		return Response.status(status).entity(output).build();
 	}
 	
+	
+	@GET
+	@Path("/count/{name}/today")
+	@Produces("application/json")
+	public Map<String,Object> getCallCountToday(
+			@PathParam("name") String name) {
+		Map<String,Object> result = new HashMap<String,Object>();
+		Map<String,Integer> count = action.getCallCountToday(name);
+		
+		List<CallCountBean> countList = new LinkedList<CallCountBean>();
+		Set<String> dates = count.keySet();
+		for (String date : dates) {
+			CallCountBean bean = new CallCountBean();
+			bean.setDate(date);
+			bean.setCount(count.get(date));
+			countList.add(bean);
+		}
+		
+		result.put("counts", countList);
+		return result;
+	}
+	
 	@GET
 	@Path("/count/{name}")
 	@Produces("application/json")
