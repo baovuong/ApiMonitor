@@ -1,10 +1,11 @@
 package bvworks.apimonitor.action;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import bvworks.apimonitor.bean.CallBean;
 import bvworks.apimonitor.dao.CallDAO;
@@ -28,16 +29,84 @@ public class CallAction {
 	}
 	
 	public Map<String,Integer> getCallCount(String name) {
-		Map<String,Integer> result = new TreeMap<String,Integer>();
+		return getCallCountPerMinute(name);
+	}
+	
+	public Map<String,Integer> getCallCountPerMinute(String name) {
+		String pattern = "yyyy-MM-dd HH:mm";
+		
+		TreeMap<String,Integer> result = getCallCountViaDateFormat(name,pattern);
+		DateTimeFormatter format = DateTimeFormat.forPattern(pattern);		
+		DateTime first = DateTime.parse(result.keySet().iterator().next(),format);
+		DateTime last = DateTime.now();
+		
+		DateTime current = first;
+		while (current.isBefore(last) || current.equals(last)) {
+			String currentString = format.print(current);
+			System.out.println(currentString);
+			if (!result.keySet().contains(currentString))
+				result.put(currentString, 0);
+			current.plusMinutes(1);
+		}
+		return result;
+	}
+	
+	public Map<String,Integer> getCallCountPerHour(String name) {
+		String pattern = "yyyy-MM-dd HH";
+		
+		TreeMap<String,Integer> result = getCallCountViaDateFormat(name,pattern);
+		
+		DateTimeFormatter format = DateTimeFormat.forPattern(pattern);
+		
+		DateTime first = DateTime.parse(result.keySet().iterator().next(),format);
+		DateTime last = DateTime.now();
+		
+		DateTime current = first;
+		while (current.isBefore(last) || current.equals(last)) {
+			String currentString = format.print(current);
+			System.out.println(currentString);
+			if (!result.keySet().contains(currentString))
+				result.put(currentString, 0);
+			current.plusHours(1);
+		}
+		
+		
+		return result;
+	}
+	
+	
+	
+	public Map<String,Integer> getCallCountPerDay(String name) {
+		String pattern = "yyyy-MM-dd";
+		TreeMap<String,Integer> result = getCallCountViaDateFormat(name,pattern);
+		
+		DateTimeFormatter format = DateTimeFormat.forPattern(pattern);
+		
+		DateTime first = DateTime.parse(result.keySet().iterator().next(),format);
+		DateTime last = DateTime.now();
+		
+		DateTime current = first;
+		while (current.isBefore(last) || current.equals(last)) {
+			String currentString = format.print(current);
+			System.out.println(currentString);
+			if (!result.keySet().contains(currentString))
+				result.put(currentString, 0);
+			current.plusDays(1);
+		}
+		
+		
+		return result;
+	}
+	
+	private TreeMap<String,Integer> getCallCountViaDateFormat(String name, String formatString) {
+		TreeMap<String,Integer> result = new TreeMap<String,Integer>();
 		
 		CallDAO dao = CallDAO.getInstance();
 		
 		CallBean[] calls = dao.getCallsByName(name);
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");		
+		DateTimeFormatter format = DateTimeFormat.forPattern(formatString);	
 		for (CallBean call : calls) {	
-			// by minute
-			System.out.println("date: "+call.getDate().toString());
-			String dateString = format.format(call.getDate());
+			String dateString = format.print(call.getDate());
 			if (!result.containsKey(dateString)) {
 				result.put(dateString, 1);
 			} else {
@@ -45,6 +114,6 @@ public class CallAction {
 			}
 		}
 		
-		return result;
+		return result;			
 	}
 }

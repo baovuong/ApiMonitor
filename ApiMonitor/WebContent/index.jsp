@@ -115,7 +115,7 @@ System.out.println("mobile: "+mobile);
 		ctx.canvas.width  = window.innerWidth;
 		ctx.canvas.height = window.innerHeight*0.55;
 		<%}else{%>
-		ctx.canvas.width  = 500;
+		ctx.canvas.width  = window.innerWidth*0.75;
         ctx.canvas.height = 500;
 		<%}%>
 		new Chart(ctx).Line(data, options);
@@ -129,7 +129,9 @@ System.out.println("mobile: "+mobile);
 			url: 'api/calls/count/'+name,
 			type: 'GET',
 			dataType: 'json',
-			data: {},
+			data: {
+				'per': 'hour'
+			},
 			success: function(data, textStatus, jqXHR) {
 				var counts = data.counts;
 				var labels = [];

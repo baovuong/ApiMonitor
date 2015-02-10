@@ -1,15 +1,14 @@
 package bvworks.apimonitor.bean;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 public class CallBean {
 	
 	private int id;
 	private String name;
-	private Date date;
+	private DateTime date;
 	
 	public CallBean() {}
 
@@ -28,24 +27,19 @@ public class CallBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Date getDate() {
+	
+	public DateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(DateTime date) {
 		this.date = date;
 	}
-	
+
 	public void setDate(String dateString) {
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try {
-			setDate(format.parse(dateString));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			setDate(new Date());
-		}
+		//DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+		setDate(DateTime.parse(dateString,format));
 	}
 	
 }

@@ -5,9 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedSet;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -15,7 +13,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import bvworks.apimonitor.action.CallAction;
@@ -50,11 +48,18 @@ public class CallService {
 	@Path("/count/{name}")
 	@Produces("application/json")
 	public Map<String,Object> getCallCount(
-			@PathParam("name") String name) {
+			@PathParam("name") String name,
+			@DefaultValue("hour") @QueryParam("per") String per) {
 		
 		Map<String,Object> result = new HashMap<String,Object>();
-		
-		Map<String,Integer> count = action.getCallCount(name);
+		Map<String,Integer> count;
+		if (per.equals("minute"))
+			count = action.getCallCountPerMinute(name);
+		else if (per.equals("hour"))
+			count = action.getCallCountPerHour(name);
+		else
+			count = action.getCallCountPerDay(name);
+
 		List<CallCountBean> countList = new LinkedList<CallCountBean>();
 		Set<String> dates = count.keySet();
 		for (String date : dates) {
