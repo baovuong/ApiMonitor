@@ -220,7 +220,7 @@ th, td {
 
 <%if (mobile) {%><div data-role="main" class="ui-content"> <%}%>
 
-<div class="left">
+<%if (!mobile) {%><div class="left"><%}%>
 
 <%if (mobile) {%><fieldset class="ui-field-contain"><%}%>
 
@@ -238,12 +238,12 @@ th, td {
 	<%if (mobile) {%><div data-role="content" class="ui-content"><%}%>
 	<canvas id="chart" <%if(mobile){%>class="mobilechart"<%}%> >canvas not supported</canvas>
 	<%if (mobile) {%></div><%}%>
-	</div>
+	<%if (!mobile) {%></div><%}%>
 	
-	<div class="right">
+	<%if (!mobile) {%><div class="right"><%}%>
 	<table id="todayscalltable" data-role="table" class="ui-responsive">
 	</table>
-	</div>
+	<%if (!mobile) {%></div><%}%>
 	
     <%if (mobile) {%></div><%}%>
 	<%if (mobile) {%></div><%}%>
