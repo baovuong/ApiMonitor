@@ -43,7 +43,7 @@ public class CallAction {
 		DateTime current = first;
 		while (current.isBefore(last) || current.equals(last)) {
 			String currentString = format.print(current);
-			System.out.println(currentString);
+			//System.out.println(currentString);
 			if (!result.keySet().contains(currentString))
 				result.put(currentString, 0);
 			current = current.plusMinutes(1);
@@ -64,7 +64,7 @@ public class CallAction {
 		DateTime current = first;
 		while (current.isBefore(last) || current.equals(last)) {
 			String currentString = format.print(current);
-			System.out.println(currentString);
+			//System.out.println(currentString);
 			if (!result.keySet().contains(currentString))
 				result.put(currentString, 0);
 			current = current.plusHours(1);
@@ -88,7 +88,7 @@ public class CallAction {
 		DateTime current = first;
 		while (current.isBefore(last) || current.equals(last)) {
 			String currentString = format.print(current);
-			System.out.println(currentString);
+			//System.out.println(currentString);
 			if (!result.keySet().contains(currentString))
 				result.put(currentString, 0);
 			current = current.plusDays(1);
