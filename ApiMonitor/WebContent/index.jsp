@@ -210,7 +210,7 @@ System.out.println("mobile: "+mobile);
 
 <%if (mobile) {%><div data-role="main" class="ui-content"> <%}%>
 
-<div id="left">
+<div class="left">
 
 <%if (mobile) {%><fieldset class="ui-field-contain"><%}%>
 
@@ -230,7 +230,7 @@ System.out.println("mobile: "+mobile);
 	<%if (mobile) {%></div><%}%>
 	</div>
 	
-	<div id="right">
+	<div class="right">
 	<table id="todayscalltable">
 	</table>
 	</div>
