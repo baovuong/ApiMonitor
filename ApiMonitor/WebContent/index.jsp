@@ -33,12 +33,12 @@ System.out.println("mobile: "+mobile);
 
 .left {
     float:left;
-    width:60%;
+    width:70%;
 }
 
 .right {
     float:right;
-    width:40%;
+    width:30%;
 }
 </style>
 
@@ -152,7 +152,7 @@ System.out.println("mobile: "+mobile);
 		ctx.canvas.width  = window.innerWidth;
 		ctx.canvas.height = window.innerHeight*0.55;
 		<%}else{%>
-		ctx.canvas.width  = window.innerWidth*0.75;
+		ctx.canvas.width  = $('#chart').parent().width();
         ctx.canvas.height = 500;
 		<%}%>
 		new Chart(ctx).Line(data, options);
