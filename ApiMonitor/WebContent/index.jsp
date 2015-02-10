@@ -40,6 +40,16 @@ System.out.println("mobile: "+mobile);
     float:right;
     width:25%;
 }
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
 </style>
 
 <script src="jquery-1.11.2.min.js"></script>
@@ -231,7 +241,7 @@ System.out.println("mobile: "+mobile);
 	</div>
 	
 	<div class="right">
-	<table border="1" id="todayscalltable">
+	<table id="todayscalltable" data-role="table" class="ui-responsive">
 	</table>
 	</div>
 	
