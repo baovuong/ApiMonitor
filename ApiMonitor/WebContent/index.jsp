@@ -41,6 +41,7 @@ System.out.println("mobile: "+mobile);
     width:25%;
 }
 
+<%if (!mobile) {%>
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -49,6 +50,7 @@ th, td {
     padding: 5px;
     text-align: left;
 }
+<%}%>
 
 </style>
 
@@ -162,7 +164,7 @@ th, td {
 		ctx.canvas.width  = window.innerWidth;
 		ctx.canvas.height = window.innerHeight*0.55;
 		<%}else{%>
-		ctx.canvas.width  = $('#chart').parent().width();
+		ctx.canvas.width  = $('#chart').parent().width() *0.9;
         ctx.canvas.height = 500;
 		<%}%>
 		new Chart(ctx).Line(data, options);
